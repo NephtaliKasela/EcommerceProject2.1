@@ -1,0 +1,142 @@
+﻿using AutoMapper;
+using EcommerceProject.Data;
+using EcommerceProject.DTOs.Category;
+using EcommerceProject.DTOs.Product;
+using EcommerceProject.DTOs.SUbCategory;
+using EcommerceProject.Models;
+using EcommerceProject.Services.CategoryServices;
+using Microsoft.EntityFrameworkCore;
+
+namespace EcommerceProject.Services.SubCategoryServices
+{
+    public class SubCategoryServices: ISubCategoryServices
+    {
+        private readonly DataContext _context;
+        private readonly IMapper _mapper;
+		private readonly ICategoryServices _categoryServices;
+
+		public SubCategoryServices(DataContext context, IMapper mapper, ICategoryServices categoryServices)
+        {
+            _context = context;
+            _mapper = mapper;
+			_categoryServices = categoryServices;
+		}
+
+        public async Task<ServiceResponse<List<GetSubCategoryDTO>>> GetAllSubCategories()
+        {
+            var subCategories = await _context.SubCategories
+                .Include(x => x.Category)
+                .Include(x => x.Products)
+                .ToListAsync();
+            var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>()
+            {
+                Data = subCategories.Select(p => _mapper.Map<GetSubCategoryDTO>(p)).ToList()
+            };
+            return serviceResponse;
+        }
+
+		public async Task<ServiceResponse<GetSubCategoryDTO>> GetSubCategoryById(int id)
+		{
+            var subCategory = await _context.SubCategories
+				.Include(x => x.Category)
+				.Include(x => x.Products)
+				.FirstOrDefaultAsync(x => x.Id == id);
+
+			var serviceResponse = new ServiceResponse<GetSubCategoryDTO>()
+			{
+				Data = _mapper.Map<GetSubCategoryDTO>(subCategory)
+			};
+			return serviceResponse;
+		}
+
+		public async Task<ServiceResponse<List<GetSubCategoryDTO>>> AddSubCategory(AddSubCategoryDTO newSubCategory)
+        {
+			var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>();
+			var subCategory = _mapper.Map<SubCategory>(newSubCategory);
+
+			var category = GetSubCatCategory(newSubCategory.CategoryId);
+			subCategory.Category = category.Data;
+
+			await _context.SubCategories.AddAsync(subCategory);
+			await _context.SaveChangesAsync();
+
+			serviceResponse.Data = await _context.SubCategories
+				.Select(p => _mapper.Map<GetSubCategoryDTO>(p)).ToListAsync();
+
+			return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetSubCategoryDTO>> UpdateSubCategory(UpdateSubCategoryDTO updatedSubCategory)
+        {
+            var serviceResponse = new ServiceResponse<GetSubCategoryDTO>();
+
+            try
+            {
+                var subCategory = await _context.SubCategories
+                    .FirstOrDefaultAsync(p => p.Id == updatedSubCategory.Id);
+                if (subCategory is null) { throw new Exception($"SubCategory with Id '{updatedSubCategory.Id}' not found"); }
+
+                subCategory.Name = updatedSubCategory.Name;
+                subCategory.Description = updatedSubCategory.Description;
+
+                await _context.SaveChangesAsync();
+
+                serviceResponse.Data = _mapper.Map<GetSubCategoryDTO>(subCategory);
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<List<GetSubCategoryDTO>>> DeleteSubCategory(int id)
+        {
+            var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>();
+
+            try
+            {
+                var subCategory = await _context.SubCategories.FirstOrDefaultAsync(sc => sc.Id == id);
+                if (subCategory is null) { throw new Exception($"Product with Id '{id}' not found"); }
+
+                _context.SubCategories.Remove(subCategory);
+
+                await _context.SaveChangesAsync();
+
+                serviceResponse.Data = await _context.SubCategories
+                    .Select(sc => _mapper.Map<GetSubCategoryDTO>(sc)).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
+        }
+
+		private ServiceResponse<Category> GetSubCatCategory(string categoryId)
+		{
+			var serviceResponse = new ServiceResponse<Category>();
+
+			try
+			{
+				int convCategoryId = Convert.ToInt32(categoryId);
+                var category = _context.Categories.FirstOrDefault(c => c.Id == convCategoryId);
+
+
+                if (category is null) { throw new Exception($"Category with Id '{convCategoryId}' not found"); }
+
+				serviceResponse.Data = category;
+				return serviceResponse;
+			}
+			catch (Exception ex)
+			{
+				serviceResponse.Success = false;
+				serviceResponse.Message = ex.Message;
+			}
+			return serviceResponse;
+		}
+
+	}
+}

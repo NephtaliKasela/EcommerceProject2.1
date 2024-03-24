@@ -1,0 +1,68 @@
+﻿@model EcommerceProject.DTOs.Actions.AddProduct_action
+
+@{
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row page-titles">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
+		<li class="breadcrumb-item"><a href="javascript:void(0)">Bootstrap</a></li>
+	</ol>
+</div>
+<!-- row -->
+
+<div class="container">
+	<form method="post" asp-controller="Product" asp-action="SaveAddProduct">
+		<div class="form-group">
+			<label for="productCategory">Store:</label>
+			<select id="StoreId" name="StoreId" class="form-control" required>
+				@* <option value="">Sélectionner une catégorie</option> *@
+				<!-- Ajoutez ici les options de catégorie en fonction de votre logique -->
+				@foreach (var store in Model.Stores)
+				{
+					<option value="@store.Id">@store.Name</option>
+				}
+			</select>
+		</div>
+
+		<br />
+		<div class="form-group">
+			<label for="productName">Nom:</label>
+			<input type="text" id="productName" name="Name" class="form-control" required>
+		</div>
+
+		<br />
+		<div class="form-group">
+			<label for="productDescription">Description:</label>
+			<textarea id="productDescription" name="Description" class="form-control" required></textarea>
+		</div>
+
+		<br />
+		<div class="form-group">
+			<label for="productPrice">Prix:</label>
+			<input type="number" step="0.01" id="productPrice" name="Price" class="form-control" required>
+		</div>
+
+		<!-- Autres propriétés spécifiques au produit -->
+
+		<br />
+		<div class="form-group">
+			<label for="productCategory">SubCategory:</label>
+			<select id="ProductSubCategoryId" name="ProductSubCategoryId" class="form-control" required>
+				@* <option value="">Sélectionner une catégorie</option> *@
+				<!-- Ajoutez ici les options de catégorie en fonction de votre logique -->
+				@foreach (var sc in Model.Subcategories)
+				{
+					<option value="@sc.Id">@sc.Name</option>
+				}
+			</select>
+		</div>
+
+		
+
+		<br />
+		<input type="submit" value="Ajouter le produit" class="btn btn-primary">
+	</form>
+
+</div>

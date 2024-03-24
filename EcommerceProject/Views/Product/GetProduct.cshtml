@@ -1,0 +1,165 @@
+﻿@model List<EcommerceProject.DTOs.Product.GetProductDTO>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!--============= HEADER ===============-->
+<header class="header2">
+    <div class="header__top">
+        <div class="header__container container">
+            <div class="header__contact">
+                <span>(+243) - 526 - 0007</span>
+
+                <span> Our location</span>
+            </div>
+
+            <p class="header__alert-news">
+                Super Value Deals - Save more with coupons
+            </p>
+
+            <a href="login-register.html" class="header__top-action">
+                Log In / Sign Up
+            </a>
+        </div>
+    </div>
+
+    <nav class="nav container">
+        <a asp-controller="Home" asp-action="Index" class="nav__logo">
+            <img src="Assets/Img/Icons/shopping-online.jpg" alt="" class="nav__logo-img" />
+        </a>
+
+        <div class="nav__menu" id="nav-menu">
+            <div class="nav__menu-top">
+                <a href="index.html" class="nav__menu-logo">
+                    <img src="Assets/Img/Icons/shopping-online.jpg" alt="">
+                </a>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="fi fi-rs-cross-small"></i>
+                </div>
+            </div>
+
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a asp-controller="Home" asp-action="Index" class="nav__link active-link">Home</a>
+                </li>
+
+                <li class="nav__item">
+                    <a asp-controller="Shop" asp-action="Index" class="nav__link">Shop</a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="accounts.html" class="nav__link">My Account</a>
+                </li>
+
+                <li class="nav__item">
+                    <a asp-controller="Compare" asp-action="Index" class="nav__link">Compare</a>
+                </li>
+            </ul>
+
+            <div class="header__search">
+                <input type="text"
+                       placeholder="Search for items..."
+                       class="form__input" />
+
+                <button class="search__btn">
+                    <img src="Assets/Img/" alt="" />
+                    <i class='bx bxs-search'></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="header__user-actions">
+            <a asp-controller="Wishlist" asp-action="Index" class="header__action-btn">
+                <!--<img src="Assets/Img/" alt="">-->
+                <i class='bx bx-heart header__action-btn'></i>
+                <span class="count">3</span>
+            </a>
+
+            <a asp-controller="Cart" asp-action="Index" class="header__action-btn">
+                <img src="Assets/Img/" alt="">
+                <i class='bx bx-shopping-bag'></i>
+                <span class="count">3</span>
+            </a>
+
+            <div class="header__action-btn nav__toggle" id="nav-toggle">
+                <img src="Assets/Img/Icons/indent_left_icon_155245.png" alt="">
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="display:flow;">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="SubCategory" asp-action="DisplaySubCategory" class="nav__link">DisplayCatg</a>
+                    </li>
+
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="SubCategory" asp-action="AddSubCategory" class="nav__link">AddCategory</a>
+                    </li>
+
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="SubCategory" asp-action="UpdateSubCategory" class="nav__link">UpdateSubCatg</a>
+                    </li>
+
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="SubCategory" asp-action="DeleteSubCategory" class="nav__link">DeleteSubCatg</a>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="Product" asp-action="AddProduct" class="nav__link">AddProduct</a>
+                    </li>
+
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="Product" asp-action="UpdateProduct" class="nav__link">UpdateProduct</a>
+                    </li>
+
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="Product" asp-action="DeleteProduct" class="nav__link">DeleteProduct</a>
+                    </li>
+
+                    <li class="nav__item" style="margin-right: 50px;">
+                        <a asp-controller="Dashboard" asp-action="Index" class="nav__link">Dashboard</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    @foreach (var p in Model)
+    {
+        <p>SubCategory: @p.SubCategory.Name</p>
+        <h3>@p.Name</h3>
+        <p>@p.Description</p>
+        <p>@p.Price</p>
+
+        <hr />
+    }
+</div>
+
+
