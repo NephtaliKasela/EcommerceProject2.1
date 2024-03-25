@@ -1,5 +1,9 @@
-﻿using EcommerceProject.Models;
+﻿using EcommerceProject.DTOs.Actions;
+using EcommerceProject.Models;
+using EcommerceProject.Services.CategoryServices;
 using EcommerceProject.Services.ProductService;
+using EcommerceProject.Services.UserServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,19 +12,38 @@ namespace EcommerceProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductService productService;
+        private readonly IProductService _productService;
+        private readonly ICategoryServices _categoryServices;
+        private readonly IUserServices _userServices;
 
-        public HomeController(ILogger<HomeController> logger, IProductService _productService)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryServices categoryServices, IUserServices userServices)
         {
             _logger = logger;
-            productService = _productService;
+            _productService = productService;
+            _categoryServices = categoryServices;
+            _userServices = userServices;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var sr = await productService.GetAllProducts();
-            var p = sr.Data;
-            return View(p);
+            if (User.Identity.IsAuthenticated)
+            {
+                // Retrieve the user ID
+                string userName = User.Identity.Name.ToLowerInvariant();
+
+                // Use the userId as needed in your code
+                int userId = await _userServices.GetUserId(userName);
+            }
+
+
+            var products = await _productService.GetAllProducts();
+            var categories = await _categoryServices.GetCategories();
+
+            var v = new Home_action();
+            v.Products = products.Data;
+            v.Categories = categories.Data;
+            return View(v);
         }
 
         public IActionResult Privacy()

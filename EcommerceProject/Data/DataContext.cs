@@ -16,6 +16,8 @@ namespace EcommerceProject.Data
 
         }
 
+        //public DbSet<User> Users => Set<User>();
+
         public DbSet<Store> Stores => Set<Store>();
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Category> Categories => Set<Category>();

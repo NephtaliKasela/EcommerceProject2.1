@@ -8,6 +8,7 @@ using EcommerceProject.Services.SubCategoryServices;
 using EcommerceProject.Services.ImageServices;
 using EcommerceProject.Services.CategoryServices;
 using EcommerceProject.Services.StoreServices;
+using EcommerceProject.Services.UserServices;
 
 internal class Program
 {
@@ -34,6 +35,7 @@ internal class Program
         builder.Services.AddScoped<IProductService, ProductService>();
         builder.Services.AddScoped<IImageServices, ImageServices>();
         builder.Services.AddScoped<IStoreServices, StoreServices>();
+        builder.Services.AddScoped<IUserServices, UserServices>();
 
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

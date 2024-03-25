@@ -1,4 +1,4 @@
-﻿@model List<EcommerceProject.DTOs.Product.GetProductDTO>
+﻿@model EcommerceProject.DTOs.Actions.Home_action
 
 @{
     ViewData["Title"] = "Home Page";
@@ -28,19 +28,19 @@
 
             <div class="categories__container swiper">
                 <div class="swiper-wrapper">
-                    @foreach(var p in Model)
+                    @foreach(var category in Model.Categories)
                     {
                         <a asp-controller="Shop" asp-action="Index" class="category__item swiper-slide">
-                            <img src="Assets/Img/images/imgs/1419AFR1-t-shirt-cher-pere-noel-mon-fils-la-fait-personnalise.webp" alt=""
+                            <img src="~/Images2/OIF.jpeg" alt=""
                                  class="category__img">
 
-                            <h3 class="category__title">@p.Name</h3>
+                            <h3 class="category__title">@category.Name</h3>
                         </a>
                     }
                     @for(int i = 1; i <= 5; i++)
                     {
                         <a asp-controller="Shop" asp-action="Index" class="category__item swiper-slide">
-                            <img src="Assets/Img/images/imgs/1419AFR1-t-shirt-cher-pere-noel-mon-fils-la-fait-personnalise.webp" alt=""
+                    <img src="~/images2/OIF.jpeg" alt=""
                                  class="category__img">
 
                             <h3 class="category__title">Unknown</h3>
@@ -68,7 +68,7 @@
             <div class="tab__items">
                 <div class="tab__item active-tab" content id="featured">
                     <div class="products__container grid">
-                        @foreach (var p in Model)
+                        @foreach (var p in Model.Products)
                         {
                             <div class="product__item">
                                 <div class="product__banner">
@@ -87,10 +87,10 @@
                                         }
                                         @if (p.ProductImages.Count == 0)
                                         {
-                                            <img src="~/Images2/OIP (1).jpeg" alt=""
+                                            <img src="~/Images2/OIF.jpeg" alt=""
                                              class="product__img default">
 
-                                            <img src="~/Images2/OIP (1).jpeg" alt=""
+                                            <img src="~/Images2/OIF.jpeg" alt=""
                                                      class="product__img hover">
                                         }
                                     </a>
@@ -126,8 +126,10 @@
                                         <i class="fi fi-rs-star"></i>
                                     </div>
                                     <div class="product__price flex">
-                                        <span class="new__price">$238.85</span>
-                                        <span class="old__price">$245.8</span>
+                                        @{ double newPrice = p.Price - (p.Price * 20 / 100); }
+                                        <span class="new__price">$@newPrice</span>
+                                        
+                                        <span class="old__price">$@p.Price</span>
                                     </div>
 
                                     <a href="#"
@@ -302,7 +304,7 @@
 
                 <div class="tab__item" content id="popular">
                     <div class="products__container grid">
-                        @foreach (var p in Model)
+                        @foreach (var p in Model.Products)
                         {
                             <div class="product__item">
                                 <div class="product__banner">
@@ -345,8 +347,9 @@
                                         <i class="fi fi-rs-star"></i>
                                     </div>
                                     <div class="product__price flex">
-                                        <span class="new__price">$238.85</span>
-                                        <span class="old__price">$245.8</span>
+                                        @{ double newPrice = p.Price - (p.Price * 20 / 100); }
+                                        <span class="new__price">$@newPrice</span>
+                                        <span class="old__price">$@p.Price</span>
                                     </div>
 
                                     <a href="#"
@@ -357,7 +360,7 @@
                                 </div>
                             </div>
 
-                            <div class="product__item">
+                            @* <div class="product__item">
                                 <div class="product__banner">
                                     <a asp-controller="Product" asp-action="Index" asp-route-productId="@p.Id" class="product__images">
                                         <img src="Assets/Img/images/imgs/1419AFR1-t-shirt-cher-pere-noel-mon-fils-la-fait-personnalise.webp" alt=""
@@ -398,7 +401,8 @@
                                         <i class="fi fi-rs-star"></i>
                                     </div>
                                     <div class="product__price flex">
-                                        <span class="new__price">$238.85</span>
+                                        @{ double newPrice = p.Price + (p.Price * 20 / 100); }
+                                        <span class="new__price">$@newPrice</span>
                                         <span class="old__price">$245.8</span>
                                     </div>
 
@@ -514,14 +518,14 @@
                                         <i class="fi fi-rs-shopping-bag-add"></i>
                                     </a>
                                 </div>
-                            </div>
+                            </div> *@
                         }
                     </div>
                 </div>
 
                 <div class="tab__item" content id="new-added">
                     <div class="products__container grid">
-                        @foreach (var p in Model)
+                        @foreach (var p in Model.Products)
                         {
                             <div class="product__item">
                                 <div class="product__banner">
@@ -564,8 +568,9 @@
                                         <i class="fi fi-rs-star"></i>
                                     </div>
                                     <div class="product__price flex">
-                                        <span class="new__price">$238.85</span>
-                                        <span class="old__price">$245.8</span>
+                                        @{ double newPrice = p.Price - (p.Price * 20 / 100); }
+                                        <span class="new__price">$@newPrice</span>
+                                        <span class="old__price">$@p.Price</span>
                                     </div>
 
                                     <a href="#"
@@ -576,7 +581,7 @@
                                 </div>
                             </div>
 
-                            <div class="product__item">
+                            @* <div class="product__item">
                                 <div class="product__banner">
                                     <a asp-controller="Product" asp-action="Index" asp-route-product="@p.Id" class="product__images">
                                         <img src="Assets/Img/images/imgs/1419AFR1-t-shirt-cher-pere-noel-mon-fils-la-fait-personnalise.webp" alt=""
@@ -733,7 +738,7 @@
                                         <i class="fi fi-rs-shopping-bag-add"></i>
                                     </a>
                                 </div>
-                            </div>
+                            </div> *@
                         }
                     </div>
                 </div>
@@ -833,7 +838,7 @@
 
                 <div class="new__container swiper">
                     <div class="swiper-wrapper">
-                        @foreach(var p in Model)
+                        @foreach(var p in Model.Products)
                         {
                             <div class="product__item swiper-slide">
                                 <div class="product__banner">
@@ -858,10 +863,10 @@
                                         }
                                         @if (p.ProductImages.Count == 0)
                                         {
-                                            <img src="~/Images2/OIP (1).jpeg" alt=""
+                                            <img src="~/Images2/OIF.jpeg" alt=""
                                                  class="product__img default">
 
-                                            <img src="~/Images2/OIP (1).jpeg" alt=""
+                                            <img src="~/Images2/OIF.jpeg" alt=""
                                                  class="product__img hover">
                                         }
                                     </a>
@@ -897,8 +902,9 @@
                                         <i class="fi fi-rs-star"></i>
                                     </div>
                                     <div class="product__price flex">
-                                        <span class="new__price">$238.85</span>
-                                        <span class="old__price">$245.8</span>
+                                        @{ double newPrice = p.Price - (p.Price * 20 / 100); }
+                                        <span class="new__price">$@newPrice</span>
+                                        <span class="old__price">$@p.Price</span>
                                     </div>
 
                                     <a href="#"

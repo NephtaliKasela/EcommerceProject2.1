@@ -46,7 +46,7 @@ namespace EcommerceProject.Controllers
         public async Task<IActionResult> SaveAddProduct(AddProductDTO newProduct)
         {
             await _productService.AddProduct(newProduct);
-            return RedirectToAction("GetProduct", "Admin");
+            return RedirectToAction("GetProduct", "ProductAdmin");
         }
 
         public async Task<IActionResult> UpdateProduct()

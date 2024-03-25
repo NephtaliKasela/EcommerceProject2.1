@@ -34,11 +34,6 @@
             <div class="product__item">
                 <div class="product__banner">
                     <a asp-controller="Product" asp-action="Index" asp-route-productId="@p.Id" class="product__images">
-                        @* <img src="Assets/Img/images/imgs/1419AFR1-t-shirt-cher-pere-noel-mon-fils-la-fait-personnalise.webp" alt=""
-                             class="product__img default">
-
-                        <img src="Assets/Img/images/imgs/il_fullxfull.5292819096_c8gz.jpg" alt=""
-                             class="product__img hover"> *@
                         @if (p.ProductImages.Count > 0)
                         {
                             <img src="data:@p.ProductImages[0].ContentType;base64,@System.Convert.ToBase64String(p.ProductImages[0].ImageData)"
@@ -53,10 +48,10 @@
                         }
                         @if (p.ProductImages.Count == 0)
                         {
-                            <img src="~/Images2/OIP (1).jpeg" alt=""
+                            <img src="~/Images2/OIF.jpeg" alt=""
                                  class="product__img default">
 
-                            <img src="~/Images2/OIP (1).jpeg" alt=""
+                            <img src="~/Images2/OIF.jpeg" alt=""
                                  class="product__img hover">
                         }
 
