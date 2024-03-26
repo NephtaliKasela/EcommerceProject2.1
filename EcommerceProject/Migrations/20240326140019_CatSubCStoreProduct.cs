@@ -5,7 +5,7 @@
 namespace EcommerceProject.Migrations
 {
     /// <inheritdoc />
-    public partial class AddStorePCscimg : Migration
+    public partial class CatSubCStoreProduct : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,7 +25,7 @@ namespace EcommerceProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Store",
+                name: "Stores",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -35,7 +35,7 @@ namespace EcommerceProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Store", x => x.Id);
+                    table.PrimaryKey("PK_Stores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,9 +75,9 @@ namespace EcommerceProject.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Store_StoreId",
+                        name: "FK_Products_Stores_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -141,7 +141,7 @@ namespace EcommerceProject.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Store");
+                name: "Stores");
 
             migrationBuilder.DropTable(
                 name: "SubCategories");

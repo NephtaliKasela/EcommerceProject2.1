@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240322160633_AddStorePCscimg")]
-    partial class AddStorePCscimg
+    [Migration("20240326140019_CatSubCStoreProduct")]
+    partial class CatSubCStoreProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,7 +127,7 @@ namespace EcommerceProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Store");
+                    b.ToTable("Stores");
                 });
 
             modelBuilder.Entity("EcommerceProject.Models.SubCategory", b =>

@@ -1,10 +1,13 @@
-﻿using EcommerceProject.DTOs.Actions;
+﻿using EcommerceProject.Data;
+using EcommerceProject.DTOs.Actions;
 using EcommerceProject.Models;
 using EcommerceProject.Services.CategoryServices;
 using EcommerceProject.Services.ProductService;
 using EcommerceProject.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace EcommerceProject.Controllers
@@ -14,27 +17,34 @@ namespace EcommerceProject.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
         private readonly ICategoryServices _categoryServices;
-        private readonly IUserServices _userServices;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryServices categoryServices, IUserServices userServices)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryServices categoryServices, 
+                                UserManager<IdentityUser> userManager, ApplicationDbContext applicationDbContext)
         {
             _logger = logger;
             _productService = productService;
             _categoryServices = categoryServices;
-            _userServices = userServices;
+            _userManager = userManager;
+            _applicationDbContext = applicationDbContext;
         }
+
 
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                // Retrieve the user ID
-                string userName = User.Identity.Name.ToLowerInvariant();
+            //var user = await _userManager.GetUserAsync(User);
 
-                // Use the userId as needed in your code
-                int userId = await _userServices.GetUserId(userName);
-            }
+            //string userName = string.Empty;
+
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    // Retrieve the user name
+            //    userName = User.Identity.Name.ToLowerInvariant();
+            //}
+
+            //var users = await _applicationDbContext.Users.ToListAsync();
 
 
             var products = await _productService.GetAllProducts();
