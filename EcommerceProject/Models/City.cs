@@ -2,14 +2,16 @@
 
 namespace EcommerceProject.Models
 {
-    public class Store
+    public class City
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Product>? Products { get; set; }
 
         // Foreign Keys
+        public Country Country { get; set; }
+
+        // Product FK
         public List<ProductRealEstate>? ProductsRealEstate { get; set; }
     }
 }

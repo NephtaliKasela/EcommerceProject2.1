@@ -1,15 +1,16 @@
 ﻿using EcommerceProject.Models.Products;
 
-namespace EcommerceProject.Models
+namespace EcommerceProject.Models.Subcategories
 {
-    public class Store
+    public class SubcategoryRealEstate
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Product>? Products { get; set; }
 
         // Foreign Keys
+        public Category Category { get; set; }
         public List<ProductRealEstate>? ProductsRealEstate { get; set; }
+
     }
 }

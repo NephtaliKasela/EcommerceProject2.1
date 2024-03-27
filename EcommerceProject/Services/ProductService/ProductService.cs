@@ -122,12 +122,6 @@ namespace EcommerceProject.Services.ProductService
 					var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number2);
 					product.Store = store;
 				}
-				//var subcategory = await _context.SubCategories.FirstOrDefaultAsync(sc => sc.Id == updatedProduct.ProductSubCategoryId);
-                //product.SubCategory = subcategory!;
-
-                // Get the store
-				//var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == updatedProduct.Id);
-				//product.SubCategory = subcategory!;
 
 				await _context.SaveChangesAsync();
 

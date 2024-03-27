@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EcommerceProject.Models.Subcategories;
+using System.ComponentModel.DataAnnotations;
 
 namespace EcommerceProject.Models
 {
@@ -11,5 +12,8 @@ namespace EcommerceProject.Models
         // Other properties specific to the category
 
         public List<SubCategory>? SubCategories { get; set; }
+
+        // Foreign Keys
+        public List<SubcategoryRealEstate>? SubcategoriesRealEstate { get; set; }
     }
 }
