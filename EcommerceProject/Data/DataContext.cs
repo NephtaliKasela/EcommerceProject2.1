@@ -1,4 +1,5 @@
 using EcommerceProject.Models;
+using EcommerceProject.Models.Images;
 using EcommerceProject.Models.Products;
 using EcommerceProject.Models.Subcategories;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ namespace EcommerceProject.Data
         public DbSet<City> Cities => Set<City>();
         public DbSet<SubcategoryRealEstate> SubcategoriesRealEstate => Set<SubcategoryRealEstate>();
         public DbSet<ProductRealEstate> ProductsRealEstate => Set<ProductRealEstate>();
+        public DbSet<ProductImageRealEstate> productImagesRealEstate => Set<ProductImageRealEstate>();
 
     }
 }

@@ -106,9 +106,11 @@ namespace EcommerceProject.Services.ProductService
                 product.Price = updatedProduct.Price;
                 product.Description = updatedProduct.Description;
 
+                bool result; int number;
+
 				// Get the Subcategory
 				//var subC = await GetProductSubCategory(updatedProduct.ProductSubCategoryId);
-				(bool result, int number) = CheckIfInteger(updatedProduct.ProductSubCategoryId);
+				(result, number) = CheckIfInteger(updatedProduct.ProductSubCategoryId);
 				if (result == true)
 				{
 					var subcategory = await _context.SubCategories.FirstOrDefaultAsync(sc => sc.Id == number);
@@ -116,10 +118,10 @@ namespace EcommerceProject.Services.ProductService
 				}
 
 				// Get Store
-				(bool result2, int number2) = CheckIfInteger(updatedProduct.StoreId);
-				if (result2 == true)
+				(result, number) = CheckIfInteger(updatedProduct.StoreId);
+				if (result == true)
 				{
-					var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number2);
+					var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number);
 					product.Store = store;
 				}
 

@@ -9,6 +9,6 @@ namespace EcommerceProject.DTOs.Continent
         public string Description { get; set; }
 
         // Foreign Keys
-        public List<Country>? Countries { get; set; }
+        public List<Models.Country>? Countries { get; set; }
     }
 }

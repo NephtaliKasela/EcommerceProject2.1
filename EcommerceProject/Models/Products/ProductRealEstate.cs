@@ -23,6 +23,6 @@ namespace EcommerceProject.Models.Products
         public City? City { get; set; }
         public SubcategoryRealEstate SubcategoryRealEstate { get; set; }
         public Store Store { get; set; }
-        public List<Models.Images.ProductImage>? ProductImages { get; set; }
+        public List<Models.Images.ProductImageRealEstate>? ProductImages { get; set; }
     }
 }

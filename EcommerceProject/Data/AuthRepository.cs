@@ -85,6 +85,7 @@ namespace EcommerceProject.Data
             throw new NotImplementedException();
         }
 
+        /*
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
@@ -120,5 +121,6 @@ namespace EcommerceProject.Data
 
             return tokenHandler.WriteToken(token);
         }
+        */
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using EcommerceProject.DTOs.Category;
+using EcommerceProject.DTOs.Continent;
+using EcommerceProject.DTOs.Country;
 using EcommerceProject.DTOs.Product;
 using EcommerceProject.DTOs.ProductImage;
 using EcommerceProject.DTOs.Store;
@@ -16,6 +18,16 @@ namespace EcommerceProject
     {
         public AutoMapperProfile()
         {
+			// Continent
+			CreateMap<Continent, GetContinentDTO>();
+			CreateMap<UpdateContinentDTO, Continent>();
+			CreateMap<AddContinentDTO, Continent>();
+
+            // Country
+            CreateMap<Country, GetCountryDTO>();
+            CreateMap<UpdateCountryDTO, Country>();
+            CreateMap<AddCountryDTO, Country>();
+
             CreateMap<Product, GetProductDTO>();
             //CreateMap<GetProductDTO, Product>();
             CreateMap<AddProductDTO, Product>();

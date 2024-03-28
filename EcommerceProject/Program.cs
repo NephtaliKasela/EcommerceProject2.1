@@ -9,6 +9,10 @@ using EcommerceProject.Services.ImageServices;
 using EcommerceProject.Services.CategoryServices;
 using EcommerceProject.Services.StoreServices;
 using EcommerceProject.Services.UserServices;
+using EcommerceProject.Services.ContinentServices;
+using EcommerceProject.Services.CountryServices;
+using EcommerceProject.Services.OtherServices;
+using Microsoft.AspNetCore.Hosting;
 
 internal class Program
 {
@@ -29,13 +33,18 @@ internal class Program
         // Add AutoMapper
         builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-        //Add Injection
+		//Add Injections
+		builder.Services.AddScoped<IContinentServices, ContinentServices>();
+        builder.Services.AddScoped<ICountryServices, CountryServices>();
+
         builder.Services.AddScoped<ICategoryServices, CategoryServices>();
         builder.Services.AddScoped<ISubCategoryServices, SubCategoryServices>();
         builder.Services.AddScoped<IProductService, ProductService>();
         builder.Services.AddScoped<IImageServices, ImageServices>();
         builder.Services.AddScoped<IStoreServices, StoreServices>();
         builder.Services.AddScoped<IUserServices, UserServices>();
+
+        builder.Services.AddScoped<IOtherServices, OtherServices>();
 
 
         builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

@@ -30,7 +30,7 @@ namespace EcommerceProject.Services.ContinentServices
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetContinentDTO>> GetCategoryById(int id)
+        public async Task<ServiceResponse<GetContinentDTO>> GetContinentById(int id)
         {
             var continent = await _context.Continents
                 .Include(c => c.Countries)

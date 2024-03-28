@@ -10,7 +10,7 @@ namespace EcommerceProject.Models
 
         // Freign Keys
         public Continent Continent { get; set; }
-        public List<City> Cities { get; set; }
+        public List<City>? Cities { get; set; }
 
         // Product FK
         public List<ProductRealEstate>? ProductsRealEstate {  get; set; }    

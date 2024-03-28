@@ -2,7 +2,7 @@
 
 namespace EcommerceProject.Models.Images
 {
-    public class ProductImage
+    public class ProductImageRealEstate
     {
         public int Id { get; set; }
         public string FileName { get; set; }

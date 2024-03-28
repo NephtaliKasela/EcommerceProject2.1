@@ -87,7 +87,7 @@ namespace EcommerceProject.Controllers
                     await _productService.DeleteProduct(productId);
                     return RedirectToAction("GetProduct");
                 }
-                catch (Exception ex)
+                catch
                 {
                     return RedirectToAction("DeleteProduct");
                 }

@@ -5,6 +5,7 @@ using EcommerceProject.DTOs.Product.ProductRealEstate;
 using EcommerceProject.Models;
 using EcommerceProject.Models.Products;
 using EcommerceProject.Services.ImageServices;
+using EcommerceProject.Services.OtherServices;
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
@@ -14,9 +15,11 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
         private readonly DataContext _context;
         private readonly IImageServices _imageServices;
         private readonly IMapper _mapper;
+        private readonly IOtherServices _otherServices;
 
-        public ProductServicesRealEstate(DataContext context, IImageServices imageServices, IMapper mapper)
+        public ProductServicesRealEstate(DataContext context, IImageServices imageServices, IMapper mapper, IOtherServices otherServices)
         {
+            _otherServices = otherServices;
             _context = context;
             _imageServices = imageServices;
             _mapper = mapper;
@@ -66,20 +69,28 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
             var serviceResponse = new ServiceResponse<List<GetProductRealEstateDTO>>();
             var product = _mapper.Map<ProductRealEstate>(newProduct);
 
+            //bool result; int number;
+
             //// Get Subcategory
-            //(bool result, int number) = CheckIfInteger(newProduct.ProductSubCategoryId);
+            //(result, number) = _otherServices.CheckIfInteger(newProduct.ProductSubCategoryId);
             //if (result == true)
             //{
             //    var subcategory = await _context.SubcategoriesRealEstate.FirstOrDefaultAsync(sc => sc.Id == number);
-            //    product.SubcategoryRealEstate = subcategory;
+            //    if (subcategory is not null)
+            //    {
+            //        product.SubcategoryRealEstate = subcategory;
+            //    }
             //}
 
             //// Get Store
-            //(bool result2, int number2) = CheckIfInteger(newProduct.ProductSubCategoryId);
-            //if (result2 == true)
+            //(result, number) = _otherServices.CheckIfInteger(newProduct.ProductSubCategoryId);
+            //if (result == true)
             //{
-            //    var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number2);
-            //    product.Store = store;
+            //    var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number);
+            //    if (store is not null)
+            //    {
+            //        product.Store = store;
+            //    }
             //}
 
             //Save product
@@ -159,39 +170,17 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
             return serviceResponse;
         }
 
-        private (bool, int) CheckIfInteger(string number)
-        {
-            try
-            {
-                int convNumber = Convert.ToInt32(number);
-                return (true, convNumber);
-            }
-            catch
-            {
-            }
-            return (false, 0);
-        }
-
-        //private async Task<ServiceResponse<SubCategory>> GetProductSubCategory(string productSubCategoryId)
+        //private (bool, int) CheckIfInteger(string number)
         //{
-        //    var serviceResponse = new ServiceResponse<SubCategory>();
-
         //    try
         //    {
-        //        int convProductSubCategoryId = Convert.ToInt32(productSubCategoryId);
-        //        var SubC = await _context.SubCategories.FirstOrDefaultAsync(sc => sc.Id == convProductSubCategoryId);
-
-        //        if (SubC is null) { throw new Exception($"Product with Id '{productSubCategoryId}' not found"); }
-
-        //        serviceResponse.Data = SubC;
-        //        return serviceResponse;
+        //        int convNumber = Convert.ToInt32(number);
+        //        return (true, convNumber);
         //    }
-        //    catch (Exception ex)
+        //    catch
         //    {
-        //        serviceResponse.Success = false;
-        //        serviceResponse.Message = ex.Message;
         //    }
-        //    return serviceResponse;
+        //    return (false, 0);
         //}
     }
 }

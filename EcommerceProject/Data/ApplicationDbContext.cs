@@ -26,6 +26,6 @@ namespace EcommerceProject.Data
         //    builder.Entity<IdentityUserToken<string>>(entity => entity.ToTable(name: "UserTokens"));
         //}
 
-        public DbSet<IdentityUser> Users => Set<IdentityUser>();
+        //public DbSet<IdentityUser> Users => Set<IdentityUser>();
     }
 }

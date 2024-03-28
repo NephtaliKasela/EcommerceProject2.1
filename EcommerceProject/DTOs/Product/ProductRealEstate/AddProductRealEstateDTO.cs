@@ -18,7 +18,7 @@ namespace EcommerceProject.DTOs.Product.ProductRealEstate
         //public DateTime PublicationDate { get; set; }
 
         // Foreign Keys
-        public Country Country { get; set; }
+        public Models.Country Country { get; set; }
         public City? City { get; set; }
     }
 }
