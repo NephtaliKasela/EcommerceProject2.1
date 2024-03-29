@@ -88,7 +88,20 @@ namespace EcommerceProject.Services.CountryServices
 				country.Name = updatedCountry.Name;
 				country.Description = updatedCountry.Description;
 
-				await _context.SaveChangesAsync();
+                bool result; int number;
+
+                // Get Continent
+                (result, number) = _otherServices.CheckIfInteger(updatedCountry.ContinentId);
+                if (result == true)
+                {
+                    var continent = await _context.Continents.FirstOrDefaultAsync(c => c.Id == number);
+                    if (continent is not null)
+                    {
+                        country.Continent = continent;
+                    }
+                }
+
+                await _context.SaveChangesAsync();
 
 				serviceResponse.Data = _mapper.Map<GetCountryDTO>(country);
 			}

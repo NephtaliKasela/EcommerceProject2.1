@@ -1,4 +1,5 @@
-﻿using EcommerceProject.DTOs.Continent;
+﻿using EcommerceProject.DTOs.Actions;
+using EcommerceProject.DTOs.Continent;
 using EcommerceProject.DTOs.Country;
 using EcommerceProject.Services.ContinentServices;
 using EcommerceProject.Services.CountryServices;
@@ -33,7 +34,13 @@ namespace EcommerceProject.Controllers
 		public async Task<IActionResult> UpdateCountry(int id)
 		{
 			var country = await _countryServices.GetCountryById(id);
-			return View(country.Data);
+			var continents = await _continentServices.GetAllContinents();
+
+			var v = new UpdateCountry_action();
+			v.Country = country.Data;
+			v.Continents = continents.Data;
+
+			return View(v);
 		}
 
 		[HttpPost]
