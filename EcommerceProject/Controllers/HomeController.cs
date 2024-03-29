@@ -30,6 +30,7 @@ namespace EcommerceProject.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             //var user = await _userManager.GetUserAsync(User);
@@ -40,7 +41,7 @@ namespace EcommerceProject.Controllers
             //{
             //    // Retrieve the user name
             //    userName = User.Identity.Name.ToLowerInvariant();
-            //}s
+            //}
 
             //var users = await _applicationDbContext.Users.ToListAsync();
 

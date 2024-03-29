@@ -8,7 +8,6 @@ namespace EcommerceProject.Services.CountryServices
 	{
 		Task<ServiceResponse<List<GetCountryDTO>>> GetAllCountries();
 		Task<ServiceResponse<GetCountryDTO>> GetCountryById(int id);
-
 		Task<ServiceResponse<List<GetCountryDTO>>> AddCountry(AddCountryDTO newCountry);
 		Task<ServiceResponse<GetCountryDTO>> UpdateCountry(UpdateCountryDTO updatedCountry);
 		Task<ServiceResponse<List<GetCountryDTO>>> DeleteCountry(int id);
