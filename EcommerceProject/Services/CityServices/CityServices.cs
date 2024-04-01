@@ -1,33 +1,140 @@
-﻿using EcommerceProject.DTOs.City;
+﻿using AutoMapper;
+using EcommerceProject.Data;
+using EcommerceProject.DTOs.City;
+using EcommerceProject.DTOs.Country;
 using EcommerceProject.Models;
+using EcommerceProject.Services.OtherServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceProject.Services.CityServices
 {
 	public class CityServices : ICityServices
 	{
-		public Task<ServiceResponse<List<GetCityDTO>>> AddCity(AddCityDTO newCity)
+		private readonly DataContext _context;
+		private readonly IMapper _mapper;
+		private readonly IOtherServices _otherServices;
+
+		public CityServices(DataContext context, IMapper mapper, IOtherServices otherServices)
 		{
-			throw new NotImplementedException();
+			_otherServices = otherServices;
+			_mapper = mapper;
+			_context = context;
 		}
 
-		public Task<ServiceResponse<List<GetCityDTO>>> DeleteCity(int id)
+		public async Task<ServiceResponse<List<GetCityDTO>>> AddCity(AddCityDTO newCity)
 		{
-			throw new NotImplementedException();
+			var serviceResponse = new ServiceResponse<List<GetCityDTO>>();
+			var city = _mapper.Map<City>(newCity);
+
+			bool result; int number;
+
+			// Get Continent
+			(result, number) = _otherServices.CheckIfInteger(newCity.CountryId);
+			if (result == true)
+			{
+				var country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == number);
+				if (country is not null)
+				{
+					city.Country= country;
+				}
+			}
+
+			await _context.Cities.AddAsync(city);
+			await _context.SaveChangesAsync();
+
+			serviceResponse.Data = await _context.Cities
+				.Select(c => _mapper.Map<GetCityDTO>(c)).ToListAsync();
+
+			return serviceResponse;
 		}
 
-		public Task<ServiceResponse<List<GetCityDTO>>> GetAllCities()
+		public async Task<ServiceResponse<List<GetCityDTO>>> GetAllCities()
 		{
-			throw new NotImplementedException();
+			var cities = await _context.Cities
+				.Include(x => x.Country)
+				.Include(x => x.ProductsRealEstate)
+				.ToListAsync();
+			var serviceResponse = new ServiceResponse<List<GetCityDTO>>()
+			{
+				Data = cities.Select(c => _mapper.Map<GetCityDTO>(c)).ToList()
+			};
+			return serviceResponse;
 		}
 
-		public Task<ServiceResponse<GetCityDTO>> GetCityById(int id)
+		public async Task<ServiceResponse<GetCityDTO>> GetCityById(int id)
 		{
-			throw new NotImplementedException();
+			var city = await _context.Cities
+				.Include(x => x.Country)
+				.Include(x => x.ProductsRealEstate)
+				.FirstOrDefaultAsync(x => x.Id == id);
+
+			var serviceResponse = new ServiceResponse<GetCityDTO>()
+			{
+				Data = _mapper.Map<GetCityDTO>(city)
+			};
+			return serviceResponse;
 		}
 
-		public Task<ServiceResponse<GetCityDTO>> UpdateCity(UpdateCityDTO updatedCity)
+		public async Task<ServiceResponse<GetCityDTO>> UpdateCity(UpdateCityDTO updatedCity)
 		{
-			throw new NotImplementedException();
+			var serviceResponse = new ServiceResponse<GetCityDTO>();
+
+			try
+			{
+				var city = await _context.Cities
+					.FirstOrDefaultAsync(p => p.Id == updatedCity.Id);
+				if (city is null) { throw new Exception($"City with Id '{updatedCity.Id}' not found"); }
+
+				city.Name = updatedCity.Name;
+				city.Description = updatedCity.Description;
+
+				bool result; int number;
+
+				// Get Country
+				(result, number) = _otherServices.CheckIfInteger(updatedCity.CountryId);
+				if (result == true)
+				{
+					var country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == number);
+					if (country is not null)
+					{
+						city.Country = country;
+					}
+				}
+
+				await _context.SaveChangesAsync();
+
+				serviceResponse.Data = _mapper.Map<GetCityDTO>(city);
+			}
+			catch (Exception ex)
+			{
+				serviceResponse.Success = false;
+				serviceResponse.Message = ex.Message;
+			}
+			return serviceResponse;
+		}
+
+		public async Task<ServiceResponse<List<GetCityDTO>>> DeleteCity(int id)
+		{
+			var serviceResponse = new ServiceResponse<List<GetCityDTO>>();
+
+			try
+			{
+				var city = await _context.Cities.FirstOrDefaultAsync(c => c.Id == id);
+				if (city is null) { throw new Exception($"City with Id '{id}' not found"); }
+
+				_context.Cities.Remove(city);
+
+				await _context.SaveChangesAsync();
+
+				serviceResponse.Data = await _context.Cities
+					.Select(c => _mapper.Map<GetCityDTO>(c)).ToListAsync();
+			}
+			catch (Exception ex)
+			{
+				serviceResponse.Success = false;
+				serviceResponse.Message = ex.Message;
+			}
+			return serviceResponse;
 		}
 	}
 }

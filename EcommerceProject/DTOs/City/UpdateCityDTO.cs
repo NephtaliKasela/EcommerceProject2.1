@@ -7,5 +7,6 @@ namespace EcommerceProject.DTOs.City
 		public int Id { get; set; }
 		public string Name { get; set; } = string.Empty;
 		public string Description { get; set; } = string.Empty;
+		public string CountryId { get; set; }
 	}
 }

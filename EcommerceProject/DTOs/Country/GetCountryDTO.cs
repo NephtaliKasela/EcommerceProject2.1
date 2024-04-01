@@ -11,7 +11,7 @@ namespace EcommerceProject.DTOs.Country
 
 		// Freign Keys
 		public Models.Continent Continent { get; set; }
-		public List<City>? Cities { get; set; }
+		public List<Models.City>? Cities { get; set; }
 
 		// Product FK
 		public List<ProductRealEstate>? ProductsRealEstate { get; set; }

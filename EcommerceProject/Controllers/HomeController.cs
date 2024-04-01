@@ -30,7 +30,6 @@ namespace EcommerceProject.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             //var user = await _userManager.GetUserAsync(User);

@@ -26,24 +26,6 @@ namespace EcommerceProject.Controllers.admin
             return View();
         }
 
-        // Category
-        public IActionResult AddCategory()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> GetCategory() 
-        {
-			var subCategory = await _categoryServices.GetCategories();
-			return View(subCategory.Data);
-		}
-
-		public async Task<IActionResult> UpdateCategory(int id)
-		{
-			var c = await _categoryServices.GetCategoryById(id);
-			return View(c.Data);
-		}
-
 		// Subcategory
 		public async Task<IActionResult> AddSubCategory()
         {

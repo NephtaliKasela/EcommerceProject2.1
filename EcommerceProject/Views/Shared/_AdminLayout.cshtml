@@ -835,19 +835,37 @@
 						</ul>
 						<ul aria-expanded="false">
 							<li>
-								<a class="has-arrow" href="javascript:void()" aria-expanded="false">Category</a>
+								<a class="has-arrow" href="javascript:void()" aria-expanded="false">City</a>
 								<ul aria-expanded="false">
-									<li><a asp-controller="Admin" asp-action="GetCategory">Categories</a></li>
-									<li><a asp-controller="Admin" asp-action="AddCategory">Add Category</a></li>
+									<li><a asp-controller="City" asp-action="GetCity">Cities</a></li>
+									<li><a asp-controller="City" asp-action="AddCity">Add City</a></li>
 								</ul>
 							</li>
 						</ul>
 						<ul aria-expanded="false">
 							<li>
-								<a class="has-arrow" href="javascript:void()" aria-expanded="false">SubCategory</a>
+								<a class="has-arrow" href="javascript:void()" aria-expanded="false">Category</a>
+								<ul aria-expanded="false">
+									<li><a asp-controller="Category" asp-action="GetCategory">Categories</a></li>
+									<li><a asp-controller="Category" asp-action="AddCategory">Add Category</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul aria-expanded="false">
+							<li>
+								<a class="has-arrow" href="javascript:void()" aria-expanded="false">Subcategory</a>
 								<ul aria-expanded="false">
 									<li><a asp-controller="Admin" asp-action="GetSubCategory">Subcategories</a></li>
 									<li><a asp-controller="Admin" asp-action="AddSubCategory">Add Subcategory</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul aria-expanded="false">
+							<li>
+								<a class="has-arrow" href="javascript:void()" aria-expanded="false">Subcategory Real Estate</a>
+								<ul aria-expanded="false">
+									<li><a asp-controller="SubcategoryRealEstate" asp-action="GetSubcategory">Subcategories</a></li>
+									<li><a asp-controller="SubcategoryRealEstate" asp-action="AddSubcategory">Add Subcategory</a></li>
 								</ul>
 							</li>
 						</ul>

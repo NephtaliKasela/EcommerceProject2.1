@@ -33,9 +33,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Subcategories\" />
-    <Folder Include="Controllers\Products\" />
-  </ItemGroup>
-
 </Project>

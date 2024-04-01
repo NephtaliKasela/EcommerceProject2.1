@@ -19,6 +19,8 @@ namespace EcommerceProject.DTOs.Product.ProductRealEstate
 
         // Foreign Keys
         public Models.Country Country { get; set; }
-        public City? City { get; set; }
+        public Models.City? City { get; set; }
+        public Models.Subcategories.SubcategoryRealEstate Subcategory { get; set; }
+        public Models.Store Store { get; set; }
     }
 }

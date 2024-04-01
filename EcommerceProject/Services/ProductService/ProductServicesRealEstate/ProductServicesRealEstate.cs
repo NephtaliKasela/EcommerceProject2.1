@@ -69,29 +69,29 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
             var serviceResponse = new ServiceResponse<List<GetProductRealEstateDTO>>();
             var product = _mapper.Map<ProductRealEstate>(newProduct);
 
-            //bool result; int number;
+            bool result; int number;
 
-            //// Get Subcategory
-            //(result, number) = _otherServices.CheckIfInteger(newProduct.ProductSubCategoryId);
-            //if (result == true)
-            //{
-            //    var subcategory = await _context.SubcategoriesRealEstate.FirstOrDefaultAsync(sc => sc.Id == number);
-            //    if (subcategory is not null)
-            //    {
-            //        product.SubcategoryRealEstate = subcategory;
-            //    }
-            //}
+            // Get Subcategory
+            (result, number) = _otherServices.CheckIfInteger(newProduct.ProductSubCategoryId);
+            if (result == true)
+            {
+                var subcategory = await _context.SubcategoriesRealEstate.FirstOrDefaultAsync(sc => sc.Id == number);
+                if (subcategory is not null)
+                {
+                    product.SubcategoryRealEstate = subcategory;
+                }
+            }
 
-            //// Get Store
-            //(result, number) = _otherServices.CheckIfInteger(newProduct.ProductSubCategoryId);
-            //if (result == true)
-            //{
-            //    var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number);
-            //    if (store is not null)
-            //    {
-            //        product.Store = store;
-            //    }
-            //}
+            // Get Store
+            (result, number) = _otherServices.CheckIfInteger(newProduct.ProductSubCategoryId);
+            if (result == true)
+            {
+                var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number);
+                if (store is not null)
+                {
+                    product.Store = store;
+                }
+            }
 
             //Save product
             _context.ProductsRealEstate.Add(product);

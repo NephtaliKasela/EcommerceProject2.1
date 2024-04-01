@@ -14,11 +14,11 @@ namespace EcommerceProject.DTOs.Product.ProductRealEstate
         public string Address { get; set; }
         public DateTime YearOfConstruction { get; set; }
 
-        //public bool Availability { get; set; }
-        //public DateTime PublicationDate { get; set; }
-
         // Foreign Keys
         public Models.Country Country { get; set; }
-        public City? City { get; set; }
-    }
+        public Models.City? City { get; set; }
+
+        public string ProductSubCategoryId { get; set; }
+
+	}
 }

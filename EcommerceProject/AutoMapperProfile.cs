@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using EcommerceProject.Controllers.Subcategories;
 using EcommerceProject.DTOs.Category;
+using EcommerceProject.DTOs.City;
 using EcommerceProject.DTOs.Continent;
 using EcommerceProject.DTOs.Country;
 using EcommerceProject.DTOs.Product;
 using EcommerceProject.DTOs.ProductImage;
 using EcommerceProject.DTOs.Store;
+using EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate;
 using EcommerceProject.DTOs.SUbCategory;
 using EcommerceProject.Models;
+using EcommerceProject.Models.Subcategories;
 
 namespace EcommerceProject
 {
@@ -28,7 +32,23 @@ namespace EcommerceProject
             CreateMap<UpdateCountryDTO, Country>();
             CreateMap<AddCountryDTO, Country>();
 
-            CreateMap<Product, GetProductDTO>();
+			// City
+			CreateMap<City, GetCityDTO>();
+			CreateMap<UpdateCityDTO, City>();
+			CreateMap<AddCityDTO, City>();
+
+            // Category
+			CreateMap<GetCategoryDTO, Category>();
+			CreateMap<AddCategoryDTO, Category>();
+			CreateMap<Category, GetCategoryDTO>();
+			CreateMap<UpdateCategoryDTO, Category>();
+
+			// SubCategory Real Estate
+			CreateMap<SubcategoryRealEstate, GetSubcategoryRealEstateDTO>();
+			CreateMap<UpdateSubcategoryRealEstateDTO, SubcategoryRealEstate>();
+			CreateMap<AddSubcategoryRealEstateDTO, SubcategoryRealEstate>();
+
+			CreateMap<Product, GetProductDTO>();
             //CreateMap<GetProductDTO, Product>();
             CreateMap<AddProductDTO, Product>();
 
@@ -39,8 +59,7 @@ namespace EcommerceProject
             CreateMap<ProductImage, GetProductImageDTO>();
             CreateMap<AddProductImageDTO, ProductImage>();
 
-            CreateMap<AddCategoryDTO, Category>();
-            CreateMap<Category, GetCategoryDTO>();
+            
 
             //CreateMap<GetStoreDTO, Store>();
             CreateMap<Store, GetStoreDTO>();
