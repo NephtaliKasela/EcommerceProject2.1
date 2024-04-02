@@ -15,10 +15,11 @@ namespace EcommerceProject.DTOs.Product.ProductRealEstate
         public DateTime YearOfConstruction { get; set; }
 
         // Foreign Keys
-        public Models.Country Country { get; set; }
-        public Models.City? City { get; set; }
+        public string CountryId { get; set; }
+        public string CityId { get; set; }
 
         public string ProductSubCategoryId { get; set; }
+		public string StoreId { get; set; }
 
 	}
 }

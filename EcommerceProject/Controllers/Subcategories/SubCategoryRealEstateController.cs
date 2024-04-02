@@ -1,4 +1,5 @@
-﻿using EcommerceProject.DTOs.Category;
+﻿using EcommerceProject.DTOs.Actions;
+using EcommerceProject.DTOs.Category;
 using EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate;
 using EcommerceProject.Services.CategoryServices;
 using EcommerceProject.Services.OtherServices;
@@ -36,7 +37,13 @@ namespace EcommerceProject.Controllers.Subcategories
 		public async Task<IActionResult> UpdateSubcategory(int id)
 		{
 			var subcategory = await _subCategoryServicesRealEstate.GetSubcategoryRealEstateById(id);
-			return View(subcategory.Data);
+            var categories = await _categoryServices.GetCategories();
+
+			var v =new UpdateSubcategoryRealEstate_action();
+			v.Subcategory = subcategory.Data;
+			v.Categories = categories.Data;
+
+            return View(v);
 		}
 
 		[HttpPost]

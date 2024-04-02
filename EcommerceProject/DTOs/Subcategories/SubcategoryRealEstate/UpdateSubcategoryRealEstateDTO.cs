@@ -8,8 +8,5 @@ namespace EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string CategoryId { get; set; }
-
-		// Foreign Keys
-		public Models.Category Category { get; set; }
 	}
 }

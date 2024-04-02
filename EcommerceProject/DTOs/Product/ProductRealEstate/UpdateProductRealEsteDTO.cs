@@ -21,5 +21,6 @@ namespace EcommerceProject.DTOs.Product.ProductRealEstate
         public Models.Country Country { get; set; }
         public Models.City? City { get; set; }
 		public string ProductSubCategoryId { get; set; }
+		public string StoreId { get; set; }
 	}
 }

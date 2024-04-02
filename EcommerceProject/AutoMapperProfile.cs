@@ -9,11 +9,13 @@ using EcommerceProject.DTOs.City;
 using EcommerceProject.DTOs.Continent;
 using EcommerceProject.DTOs.Country;
 using EcommerceProject.DTOs.Product;
+using EcommerceProject.DTOs.Product.ProductRealEstate;
 using EcommerceProject.DTOs.ProductImage;
 using EcommerceProject.DTOs.Store;
 using EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate;
 using EcommerceProject.DTOs.SUbCategory;
 using EcommerceProject.Models;
+using EcommerceProject.Models.Products;
 using EcommerceProject.Models.Subcategories;
 
 namespace EcommerceProject
@@ -38,7 +40,7 @@ namespace EcommerceProject
 			CreateMap<AddCityDTO, City>();
 
             // Category
-			CreateMap<GetCategoryDTO, Category>();
+			//CreateMap<GetCategoryDTO, Category>();
 			CreateMap<AddCategoryDTO, Category>();
 			CreateMap<Category, GetCategoryDTO>();
 			CreateMap<UpdateCategoryDTO, Category>();
@@ -47,6 +49,11 @@ namespace EcommerceProject
 			CreateMap<SubcategoryRealEstate, GetSubcategoryRealEstateDTO>();
 			CreateMap<UpdateSubcategoryRealEstateDTO, SubcategoryRealEstate>();
 			CreateMap<AddSubcategoryRealEstateDTO, SubcategoryRealEstate>();
+
+			// Product Real Estate
+			CreateMap<ProductRealEstate, GetProductRealEstateDTO>();
+			CreateMap<UpdateProductRealEsteDTO, ProductRealEstate>();
+			CreateMap<AddProductRealEstateDTO, ProductRealEstate>();
 
 			CreateMap<Product, GetProductDTO>();
             //CreateMap<GetProductDTO, Product>();

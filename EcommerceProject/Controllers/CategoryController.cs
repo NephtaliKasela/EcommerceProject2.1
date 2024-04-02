@@ -36,14 +36,14 @@ namespace EcommerceProject.Controllers
         {
             _categoryServices.AddCategory(newCategory);
 
-            return RedirectToAction("GetCategory", "Admin");
+            return RedirectToAction("GetCategory");
         }
 
         [HttpPost]
         public async Task<IActionResult> SaveUpdateCategory(UpdateCategoryDTO updatedSubCategory)
         {
             var category = await _categoryServices.UpdateCategory(updatedSubCategory);
-            return RedirectToAction("GetCategory", "Admin");
+            return RedirectToAction("GetCategory");
         }
 
         public IActionResult DeleteSubCategory()
@@ -54,7 +54,7 @@ namespace EcommerceProject.Controllers
         public async Task<IActionResult> SaveDeleteCategory(int id)
         {
 			var subCategory = await _categoryServices.DeleteCategory(id);
-			return RedirectToAction("GetCategory", "Admin");
+			return RedirectToAction("GetCategory");
 		}
     }
 }

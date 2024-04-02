@@ -3,6 +3,7 @@ using EcommerceProject.DTOs.Actions;
 using EcommerceProject.Models;
 using EcommerceProject.Services.CategoryServices;
 using EcommerceProject.Services.ProductService;
+using EcommerceProject.Services.ProductService.ProductServicesRealEstate;
 using EcommerceProject.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,16 +17,19 @@ namespace EcommerceProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
-        private readonly ICategoryServices _categoryServices;
+		private readonly IProductServicesRealEstate _productServicesRealEstate;
+		private readonly ICategoryServices _categoryServices;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _applicationDbContext;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryServices categoryServices, 
+        public HomeController(ILogger<HomeController> logger, IProductService productService, IProductServicesRealEstate productServicesRealEstate,
+                                ICategoryServices categoryServices, 
                                 UserManager<IdentityUser> userManager, ApplicationDbContext applicationDbContext)
         {
             _logger = logger;
             _productService = productService;
-            _categoryServices = categoryServices;
+			_productServicesRealEstate = productServicesRealEstate;
+			_categoryServices = categoryServices;
             _userManager = userManager;
             _applicationDbContext = applicationDbContext;
         }
@@ -46,10 +50,12 @@ namespace EcommerceProject.Controllers
 
 
             var products = await _productService.GetAllProducts();
+            var productsRE = await _productServicesRealEstate.GetAllProducts();
             var categories = await _categoryServices.GetCategories();
 
             var v = new Home_action();
             v.Products = products.Data;
+            v.ProductsRealEstate = productsRE.Data;
             v.Categories = categories.Data;
             return View(v);
         }

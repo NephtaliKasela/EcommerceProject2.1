@@ -30,6 +30,8 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
             var products = await _context.ProductsRealEstate
                 .Include(p => p.SubcategoryRealEstate)
                 .Include(p => p.Store)
+                .Include(p => p.Country)
+                .Include(p => p.City)
                 .Include(p => p.ProductImages)
                 .ToListAsync();
             var serviceResponse = new ServiceResponse<List<GetProductRealEstateDTO>>()
@@ -47,6 +49,8 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
                 var product = await _context.ProductsRealEstate
                     .Include(p => p.Store)
                     .Include(p => p.SubcategoryRealEstate)
+                    .Include(p => p.Country)
+                    .Include(p => p.City)
                     .Include(p => p.ProductImages)
                     .FirstOrDefaultAsync(p => p.Id == id);
                 if (product is null) { throw new Exception($"Product with Id '{id}' not found"); }
@@ -58,9 +62,6 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
                 serviceResponse.Success = false;
                 serviceResponse.Message = ex.Message;
             }
-
-
-
             return serviceResponse;
         }
 
@@ -83,7 +84,7 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
             }
 
             // Get Store
-            (result, number) = _otherServices.CheckIfInteger(newProduct.ProductSubCategoryId);
+            (result, number) = _otherServices.CheckIfInteger(newProduct.StoreId);
             if (result == true)
             {
                 var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number);
@@ -93,8 +94,33 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
                 }
             }
 
-            //Save product
-            _context.ProductsRealEstate.Add(product);
+			// Get Country
+			(result, number) = _otherServices.CheckIfInteger(newProduct.CountryId);
+			if (result == true)
+			{
+				var country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == number);
+				if (country is not null)
+				{
+					product.Country = country;
+				}
+			}
+
+			// Get City
+			(result, number) = _otherServices.CheckIfInteger(newProduct.CityId);
+			if (result == true)
+			{
+				var city = await _context.Cities.FirstOrDefaultAsync(c => c.Id == number);
+				if (city is not null)
+				{
+					product.City = city;
+				}
+			}
+
+            product.PublicationDate = DateTime.Now;
+            product.Availability = true;
+
+			//Save product
+			_context.ProductsRealEstate.Add(product);
             await _context.SaveChangesAsync();
 
             serviceResponse.Data = await _context.ProductsRealEstate
@@ -117,22 +143,22 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
                 product.Description = updatedProduct.Description;
                 // add more *******
 
+                bool result; int IdNumber;
+				// Get the Subcategory
+				(result, IdNumber) = _otherServices.CheckIfInteger(updatedProduct.ProductSubCategoryId);
+                if (result == true)
+                {
+                    var subcategory = await _context.SubcategoriesRealEstate.FirstOrDefaultAsync(sc => sc.Id == IdNumber);
+                    product.SubcategoryRealEstate = subcategory;
+                }
 
-                //// Get the Subcategory
-                //(bool result, int number) = CheckIfInteger(updatedProduct.ProductSubCategoryId);
-                //if (result == true)
-                //{
-                //    var subcategory = await _context.SubcategoriesRealEstate.FirstOrDefaultAsync(sc => sc.Id == number);
-                //    product.SubcategoryRealEstate = subcategory;
-                //}
-
-                //// Get Store
-                //(bool result2, int number2) = CheckIfInteger(updatedProduct.StoreId);
-                //if (result2 == true)
-                //{
-                //    var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == number2);
-                //    product.Store = store;
-                //}
+                // Get Store
+                (result, IdNumber) = _otherServices.CheckIfInteger(updatedProduct.StoreId);
+                if (result == true)
+                {
+                    var store = await _context.Stores.FirstOrDefaultAsync(s => s.Id == IdNumber);
+                    product.Store = store;
+                }
 
                 await _context.SaveChangesAsync();
 
@@ -169,18 +195,5 @@ namespace EcommerceProject.Services.ProductService.ProductServicesRealEstate
             }
             return serviceResponse;
         }
-
-        //private (bool, int) CheckIfInteger(string number)
-        //{
-        //    try
-        //    {
-        //        int convNumber = Convert.ToInt32(number);
-        //        return (true, convNumber);
-        //    }
-        //    catch
-        //    {
-        //    }
-        //    return (false, 0);
-        //}
     }
 }

@@ -1,6 +1,8 @@
 ﻿using EcommerceProject.DTOs.Actions;
 using EcommerceProject.DTOs.Product.ProductRealEstate;
 using EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate;
+using EcommerceProject.Services.CityServices;
+using EcommerceProject.Services.CountryServices;
 using EcommerceProject.Services.ProductService;
 using EcommerceProject.Services.ProductService.ProductServicesRealEstate;
 using EcommerceProject.Services.StoreServices;
@@ -13,15 +15,19 @@ namespace EcommerceProject.Controllers.Products
     public class ProductRealEstateController : Controller
     {
         private readonly IStoreServices _storeServices;
-        private readonly IProductServicesRealEstate _productServicesRealEstate;
+		private readonly ICountryServices _countryServices;
+		private readonly ICityServices _cityServices;
+		private readonly IProductServicesRealEstate _productServicesRealEstate;
 		private readonly ISubCategoryServicesRealEstate _subCategoryServicesRealEstate;
 
-		public ProductRealEstateController(IProductServicesRealEstate productServicesRealEstate, ISubCategoryServicesRealEstate subCategoryServicesRealEstate, IStoreServices storeServices)
+		public ProductRealEstateController(IProductServicesRealEstate productServicesRealEstate, ISubCategoryServicesRealEstate subCategoryServicesRealEstate, IStoreServices storeServices, ICountryServices countryServices, ICityServices cityServices)
         {
             _productServicesRealEstate = productServicesRealEstate;
 			_subCategoryServicesRealEstate = subCategoryServicesRealEstate;
             _storeServices = storeServices;
-        }
+			_countryServices = countryServices;
+			_cityServices = cityServices;
+		}
 
         public async Task<IActionResult> GetProduct()
         {
@@ -33,11 +39,15 @@ namespace EcommerceProject.Controllers.Products
         {
             var subcategories = await _subCategoryServicesRealEstate.GetAllSubcategoriesRealEstate();
             var stores = await _storeServices.GetAllStores();
+            var countries = await _countryServices.GetAllCountries();
+            var cities = await _cityServices.GetAllCities();
 
             var v = new AddProductRealEstate_action();
 
             v.Subcategories = subcategories.Data;
             v.Stores = stores.Data;
+            v.Countries = countries.Data;
+            v.Cities = cities.Data;
 
             return View(v);
         }
@@ -50,9 +60,13 @@ namespace EcommerceProject.Controllers.Products
 
             var subcategories = await _subCategoryServicesRealEstate.GetAllSubcategoriesRealEstate();
             var stores = await _storeServices.GetAllStores();
+            var countries = await _countryServices.GetAllCountries();
+            var cities = await _cityServices.GetAllCities();
 
             v.Subcategories = subcategories.Data;
             v.Stores = stores.Data;
+            v.Countries = countries.Data;
+            v.Cities = cities.Data;
             v.Product = product.Data;
 
             return View(v);
