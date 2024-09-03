@@ -49,15 +49,16 @@ namespace EcommerceProject.Controllers
             //var users = await _applicationDbContext.Users.ToListAsync();
 
 
-            var products = await _productService.GetAllProducts();
-            var productsRE = await _productServicesRealEstate.GetAllProducts();
-            var categories = await _categoryServices.GetCategories();
+            //var products = await _productService.GetAllProducts();
+            //var productsRE = await _productServicesRealEstate.GetAllProducts();
+            //var categories = await _categoryServices.GetCategories();
 
-            var v = new Home_action();
-            v.Products = products.Data;
-            v.ProductsRealEstate = productsRE.Data;
-            v.Categories = categories.Data;
-            return View(v);
+            //var v = new Home_action();
+            //v.Products = products.Data;
+            //v.ProductsRealEstate = productsRE.Data;
+            //v.Categories = categories.Data;
+            //return View(v);
+            return View();
         }
 
         public IActionResult Privacy()
