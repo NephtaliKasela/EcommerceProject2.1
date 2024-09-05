@@ -11,7 +11,7 @@ namespace EcommerceProject.Models
 
         // Other properties specific to the product
         public Store Store { get; set; }
-        public SubCategory SubCategory { get; set; } // Foreign key property
+        public Subcategory SubCategory { get; set; } // Foreign key property
         public List<ProductImage>? ProductImages { get; set; } 
     }
 }

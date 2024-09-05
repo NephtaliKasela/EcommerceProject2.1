@@ -16,7 +16,6 @@ using EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate;
 using EcommerceProject.DTOs.SUbCategory;
 using EcommerceProject.Models;
 using EcommerceProject.Models.Products;
-using EcommerceProject.Models.Subcategories;
 
 namespace EcommerceProject
 {
@@ -46,21 +45,21 @@ namespace EcommerceProject
 			CreateMap<UpdateCategoryDTO, Category>();
 
 			// SubCategory Real Estate
-			CreateMap<SubcategoryRealEstate, GetSubcategoryRealEstateDTO>();
-			CreateMap<UpdateSubcategoryRealEstateDTO, SubcategoryRealEstate>();
-			CreateMap<AddSubcategoryRealEstateDTO, SubcategoryRealEstate>();
+			CreateMap<Subcategory, GetSubcategoryRealEstateDTO>();
+			CreateMap<UpdateSubcategoryRealEstateDTO, Subcategory>();
+			CreateMap<AddSubcategoryRealEstateDTO, Subcategory>();
 
 			// Product Real Estate
-			CreateMap<ProductRealEstate, GetProductRealEstateDTO>();
-			CreateMap<UpdateProductRealEsteDTO, ProductRealEstate>();
-			CreateMap<AddProductRealEstateDTO, ProductRealEstate>();
+			CreateMap<BodyProduct, GetProductRealEstateDTO>();
+			CreateMap<UpdateProductRealEsteDTO, BodyProduct>();
+			CreateMap<AddProductRealEstateDTO, BodyProduct>();
 
 			CreateMap<Product, GetProductDTO>();
             //CreateMap<GetProductDTO, Product>();
             CreateMap<AddProductDTO, Product>();
 
-            CreateMap<AddSubCategoryDTO, SubCategory>();
-            CreateMap<SubCategory, GetSubCategoryDTO>();
+            CreateMap<AddSubCategoryDTO, Subcategory>();
+            CreateMap<Subcategory, GetSubCategoryDTO>();
             //CreateMap<UpdateSubCategoryDTO, GetSubCategoryDTO>();
 
             CreateMap<ProductImage, GetProductImageDTO>();

@@ -13,6 +13,6 @@ namespace EcommerceProject.DTOs.City
 		public Models.Country Country { get; set; }
 
 		// Product FK
-		public List<ProductRealEstate>? ProductsRealEstate { get; set; }
+		public List<BodyProduct>? ProductsRealEstate { get; set; }
 	}
 }

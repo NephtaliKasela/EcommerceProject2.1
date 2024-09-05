@@ -10,6 +10,8 @@ namespace EcommerceProject.Models
         public List<Product>? Products { get; set; }
 
         // Foreign Keys
-        public List<ProductRealEstate>? ProductsRealEstate { get; set; }
+        public Country Country { get; set; }
+        public City? City { get; set; }
+        public List<BodyProduct>? BodyProducts { get; set; }
     }
 }

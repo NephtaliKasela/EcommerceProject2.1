@@ -16,7 +16,7 @@ namespace EcommerceProject.DTOs.Product
         // Other properties specific to the product
 
         //public int CategoryId { get; set; } // Foreign key property
-        public SubCategory SubCategory { get; set; } // Navigation property
+        public Subcategory SubCategory { get; set; } // Navigation property
 		public Models.Store Store { get; set; } // Foreign key property
 
 		public string ProductSubCategoryId { get; set; }

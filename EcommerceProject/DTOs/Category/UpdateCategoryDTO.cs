@@ -9,6 +9,6 @@ namespace EcommerceProject.DTOs.Category
         public string Description { get; set; }
         // Other properties specific to the category
 
-        public List<SubCategory> SubCategories { get; set; }
+        public List<Subcategory> SubCategories { get; set; }
     }
 }

@@ -52,7 +52,7 @@ namespace EcommerceProject.Services.CityServices
 		{
 			var cities = await _context.Cities
 				.Include(x => x.Country)
-				.Include(x => x.ProductsRealEstate)
+				.Include(x => x.BodyProducts)
 				.ToListAsync();
 			var serviceResponse = new ServiceResponse<List<GetCityDTO>>()
 			{
@@ -65,7 +65,7 @@ namespace EcommerceProject.Services.CityServices
 		{
 			var city = await _context.Cities
 				.Include(x => x.Country)
-				.Include(x => x.ProductsRealEstate)
+				.Include(x => x.BodyProducts)
 				.FirstOrDefaultAsync(x => x.Id == id);
 
 			var serviceResponse = new ServiceResponse<GetCityDTO>()

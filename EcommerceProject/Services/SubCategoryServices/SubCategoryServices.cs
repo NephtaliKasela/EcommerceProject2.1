@@ -26,7 +26,7 @@ namespace EcommerceProject.Services.SubCategoryServices
         {
             var subCategories = await _context.SubCategories
                 .Include(x => x.Category)
-                .Include(x => x.Products)
+                .Include(x => x)
                 .ToListAsync();
             var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>()
             {
@@ -39,7 +39,7 @@ namespace EcommerceProject.Services.SubCategoryServices
 		{
             var subCategory = await _context.SubCategories
 				.Include(x => x.Category)
-				.Include(x => x.Products)
+				.Include(x => x.BodyProducts)
 				.FirstOrDefaultAsync(x => x.Id == id);
 
 			var serviceResponse = new ServiceResponse<GetSubCategoryDTO>()
@@ -52,7 +52,7 @@ namespace EcommerceProject.Services.SubCategoryServices
 		public async Task<ServiceResponse<List<GetSubCategoryDTO>>> AddSubCategory(AddSubCategoryDTO newSubCategory)
         {
 			var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>();
-			var subCategory = _mapper.Map<SubCategory>(newSubCategory);
+			var subCategory = _mapper.Map<Subcategory>(newSubCategory);
 
 			var category = GetSubCatCategory(newSubCategory.CategoryId);
 			subCategory.Category = category.Data;

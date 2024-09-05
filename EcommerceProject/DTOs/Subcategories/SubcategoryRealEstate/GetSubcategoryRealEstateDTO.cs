@@ -10,6 +10,6 @@ namespace EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate
 
 		// Foreign Keys
 		public Models.Category Category { get; set; }
-		public List<ProductRealEstate>? ProductsRealEstate { get; set; }
+		public List<BodyProduct>? ProductsRealEstate { get; set; }
 	}
 }

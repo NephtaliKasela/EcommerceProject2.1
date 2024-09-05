@@ -4,7 +4,6 @@ using EcommerceProject.DTOs.Category;
 using EcommerceProject.DTOs.Subcategories.SubcategoryRealEstate;
 using EcommerceProject.DTOs.SUbCategory;
 using EcommerceProject.Models;
-using EcommerceProject.Models.Subcategories;
 using EcommerceProject.Services.CategoryServices;
 using EcommerceProject.Services.OtherServices;
 using EcommerceProject.Services.SubCategoryServicesRealEstate;
@@ -12,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceProject.Services.SubCategoryServices
 {
-	public class SubCategoryServicesRealEstate : ISubCategoryServicesRealEstate
+    public class SubCategoryServicesRealEstate : ISubCategoryServicesRealEstate
 	{
 		private readonly DataContext _context;
 		private readonly IMapper _mapper;
@@ -31,7 +30,7 @@ namespace EcommerceProject.Services.SubCategoryServices
 		public async Task<ServiceResponse<List<GetSubcategoryRealEstateDTO>>> AddSubcategoryRealEstate(AddSubcategoryRealEstateDTO newSubcategory)
 		{
 			var serviceResponse = new ServiceResponse<List<GetSubcategoryRealEstateDTO>>();
-			var subcategory = _mapper.Map<SubcategoryRealEstate>(newSubcategory);
+			var subcategory = _mapper.Map<Subcategory>(newSubcategory);
 
 			bool result; int number;
 
@@ -59,7 +58,7 @@ namespace EcommerceProject.Services.SubCategoryServices
 		{
 			var subcategories = await _context.SubcategoriesRealEstate
 				.Include(x => x.Category)
-				.Include(x => x.ProductsRealEstate)
+				.Include(x => x.BodyProducts)
 				.ToListAsync();
 			var serviceResponse = new ServiceResponse<List<GetSubcategoryRealEstateDTO>>()
 			{
@@ -72,7 +71,7 @@ namespace EcommerceProject.Services.SubCategoryServices
 		{
 			var subcategory = await _context.SubcategoriesRealEstate
 				.Include(x => x.Category)
-				.Include(x => x.ProductsRealEstate)
+				.Include(x => x.BodyProducts)
 				.FirstOrDefaultAsync(x => x.Id == id);
 
 			var serviceResponse = new ServiceResponse<GetSubcategoryRealEstateDTO>()

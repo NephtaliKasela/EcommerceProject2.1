@@ -1,19 +1,14 @@
-﻿using EcommerceProject.Models.Subcategories;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EcommerceProject.Models
 {
     public class Category
     {
-        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        // Other properties specific to the category
-
-        public List<SubCategory>? SubCategories { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
         // Foreign Keys
-        public List<SubcategoryRealEstate>? SubcategoriesRealEstate { get; set; }
+        public List<Subcategory>? SubCategories { get; set; }
     }
 }

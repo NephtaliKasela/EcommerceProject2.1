@@ -1,7 +1,6 @@
 using EcommerceProject.Models;
 using EcommerceProject.Models.Images;
 using EcommerceProject.Models.Products;
-using EcommerceProject.Models.Subcategories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
@@ -25,7 +24,7 @@ namespace EcommerceProject.Data
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Category> Categories => Set<Category>();
 
-        public DbSet<SubCategory> SubCategories => Set<SubCategory>();
+        public DbSet<Subcategory> SubCategories => Set<Subcategory>();
         public DbSet<ProductImage> ProductImages => Set<ProductImage>();
 
         //*******************
@@ -33,9 +32,9 @@ namespace EcommerceProject.Data
         public DbSet<Continent> Continents => Set<Continent>();
         public DbSet<Country> Countries => Set<Country>();
         public DbSet<City> Cities => Set<City>();
-        public DbSet<SubcategoryRealEstate> SubcategoriesRealEstate => Set<SubcategoryRealEstate>();
-        public DbSet<ProductRealEstate> ProductsRealEstate => Set<ProductRealEstate>();
-        public DbSet<ProductImageRealEstate> productImagesRealEstate => Set<ProductImageRealEstate>();
+        public DbSet<Subcategory> SubcategoriesRealEstate => Set<Subcategory>();
+        public DbSet<BodyProduct> BodyProducts => Set<BodyProduct>();
+        public DbSet<BodyProductImage> productImagesRealEstate => Set<BodyProductImage>();
 
     }
 }
