@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using EcommerceProject.Data;
 using EcommerceProject.DTOs.Category;
-using EcommerceProject.DTOs.SUbCategory;
+using EcommerceProject.DTOs.Subcategory;
 using EcommerceProject.Models;
 using Microsoft.EntityFrameworkCore;
 

@@ -8,6 +8,6 @@ namespace EcommerceProject.Models.Images
         public string FileName { get; set; }
         public byte[] ImageData { get; set; }
         public string ContentType { get; set; }
-        public BodyProduct ProductRealEstate { get; set; }
+        public BodyProduct BodyProduct { get; set; }
     }
 }

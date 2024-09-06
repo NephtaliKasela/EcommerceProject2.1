@@ -1,9 +1,10 @@
 ﻿using EcommerceProject.Models;
 
-namespace EcommerceProject.DTOs.SUbCategory
+namespace EcommerceProject.DTOs.Subcategory
 {
-    public class AddSubCategoryDTO
-    {public string Name { get; set; }
+    public class AddSubcategoryDTO
+    {
+		public string Name { get; set; }
         public string Description { get; set; }
 		// Other properties specific to the category
 

@@ -1,6 +1,6 @@
-﻿namespace EcommerceProject.DTOs.SUbCategory
+﻿namespace EcommerceProject.DTOs.Subcategory
 {
-    public class UpdateSubCategoryDTO
+    public class UpdateSubcategoryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

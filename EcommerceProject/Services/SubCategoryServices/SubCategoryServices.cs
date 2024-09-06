@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using EcommerceProject.Data;
 using EcommerceProject.DTOs.Category;
-using EcommerceProject.DTOs.Product;
-using EcommerceProject.DTOs.SUbCategory;
+using EcommerceProject.DTOs.Subcategory;
 using EcommerceProject.Models;
 using EcommerceProject.Services.CategoryServices;
 using Microsoft.EntityFrameworkCore;
@@ -22,36 +21,36 @@ namespace EcommerceProject.Services.SubCategoryServices
 			_categoryServices = categoryServices;
 		}
 
-        public async Task<ServiceResponse<List<GetSubCategoryDTO>>> GetAllSubCategories()
+        public async Task<ServiceResponse<List<GetSubcategoryDTO>>> GetAllSubCategories()
         {
             var subCategories = await _context.SubCategories
                 .Include(x => x.Category)
                 .Include(x => x)
                 .ToListAsync();
-            var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>()
+            var serviceResponse = new ServiceResponse<List<GetSubcategoryDTO>>()
             {
-                Data = subCategories.Select(p => _mapper.Map<GetSubCategoryDTO>(p)).ToList()
+                Data = subCategories.Select(p => _mapper.Map<GetSubcategoryDTO>(p)).ToList()
             };
             return serviceResponse;
         }
 
-		public async Task<ServiceResponse<GetSubCategoryDTO>> GetSubCategoryById(int id)
+		public async Task<ServiceResponse<GetSubcategoryDTO>> GetSubCategoryById(int id)
 		{
             var subCategory = await _context.SubCategories
 				.Include(x => x.Category)
 				.Include(x => x.BodyProducts)
 				.FirstOrDefaultAsync(x => x.Id == id);
 
-			var serviceResponse = new ServiceResponse<GetSubCategoryDTO>()
+			var serviceResponse = new ServiceResponse<GetSubcategoryDTO>()
 			{
-				Data = _mapper.Map<GetSubCategoryDTO>(subCategory)
+				Data = _mapper.Map<GetSubcategoryDTO>(subCategory)
 			};
 			return serviceResponse;
 		}
 
-		public async Task<ServiceResponse<List<GetSubCategoryDTO>>> AddSubCategory(AddSubCategoryDTO newSubCategory)
+		public async Task<ServiceResponse<List<GetSubcategoryDTO>>> AddSubCategory(AddSubcategoryDTO newSubCategory)
         {
-			var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>();
+			var serviceResponse = new ServiceResponse<List<GetSubcategoryDTO>>();
 			var subCategory = _mapper.Map<Subcategory>(newSubCategory);
 
 			var category = GetSubCatCategory(newSubCategory.CategoryId);
@@ -61,14 +60,14 @@ namespace EcommerceProject.Services.SubCategoryServices
 			await _context.SaveChangesAsync();
 
 			serviceResponse.Data = await _context.SubCategories
-				.Select(p => _mapper.Map<GetSubCategoryDTO>(p)).ToListAsync();
+				.Select(p => _mapper.Map<GetSubcategoryDTO>(p)).ToListAsync();
 
 			return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetSubCategoryDTO>> UpdateSubCategory(UpdateSubCategoryDTO updatedSubCategory)
+        public async Task<ServiceResponse<GetSubcategoryDTO>> UpdateSubCategory(UpdateSubcategoryDTO updatedSubCategory)
         {
-            var serviceResponse = new ServiceResponse<GetSubCategoryDTO>();
+            var serviceResponse = new ServiceResponse<GetSubcategoryDTO>();
 
             try
             {
@@ -81,7 +80,7 @@ namespace EcommerceProject.Services.SubCategoryServices
 
                 await _context.SaveChangesAsync();
 
-                serviceResponse.Data = _mapper.Map<GetSubCategoryDTO>(subCategory);
+                serviceResponse.Data = _mapper.Map<GetSubcategoryDTO>(subCategory);
             }
             catch (Exception ex)
             {
@@ -91,9 +90,9 @@ namespace EcommerceProject.Services.SubCategoryServices
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetSubCategoryDTO>>> DeleteSubCategory(int id)
+        public async Task<ServiceResponse<List<GetSubcategoryDTO>>> DeleteSubCategory(int id)
         {
-            var serviceResponse = new ServiceResponse<List<GetSubCategoryDTO>>();
+            var serviceResponse = new ServiceResponse<List<GetSubcategoryDTO>>();
 
             try
             {
@@ -105,7 +104,7 @@ namespace EcommerceProject.Services.SubCategoryServices
                 await _context.SaveChangesAsync();
 
                 serviceResponse.Data = await _context.SubCategories
-                    .Select(sc => _mapper.Map<GetSubCategoryDTO>(sc)).ToListAsync();
+                    .Select(sc => _mapper.Map<GetSubcategoryDTO>(sc)).ToListAsync();
             }
             catch (Exception ex)
             {

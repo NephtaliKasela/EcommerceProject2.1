@@ -1,5 +1,4 @@
-﻿using EcommerceProject.DTOs.Product;
-using EcommerceProject.Services.ImageServices;
+﻿using EcommerceProject.Services.ImageServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceProject.Controllers

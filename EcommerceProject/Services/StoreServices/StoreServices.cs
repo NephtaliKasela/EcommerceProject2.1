@@ -21,7 +21,6 @@ namespace EcommerceProject.Services.StoreServices
         public async Task<ServiceResponse<List<GetStoreDTO>>> GetAllStores()
         {
             var stores = await _context.Stores
-                .Include(c => c.Products)
                 .ToListAsync();
             var serviceResponse = new ServiceResponse<List<GetStoreDTO>>()
             {
@@ -33,7 +32,6 @@ namespace EcommerceProject.Services.StoreServices
         public async Task<ServiceResponse<GetStoreDTO>> GetStoreById(int id)
         {
             var store = await _context.Stores
-                .Include(s => s.Products)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             var serviceResponse = new ServiceResponse<GetStoreDTO>()

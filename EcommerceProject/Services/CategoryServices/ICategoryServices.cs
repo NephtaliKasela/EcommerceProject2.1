@@ -1,5 +1,5 @@
 ﻿using EcommerceProject.DTOs.Category;
-using EcommerceProject.DTOs.SUbCategory;
+using EcommerceProject.DTOs.Subcategory;
 using EcommerceProject.Models;
 
 namespace EcommerceProject.Services.CategoryServices

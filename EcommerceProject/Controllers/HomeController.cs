@@ -2,8 +2,6 @@
 using EcommerceProject.DTOs.Actions;
 using EcommerceProject.Models;
 using EcommerceProject.Services.CategoryServices;
-using EcommerceProject.Services.ProductService;
-using EcommerceProject.Services.ProductService.ProductServicesRealEstate;
 using EcommerceProject.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,19 +14,15 @@ namespace EcommerceProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductService _productService;
-		private readonly IProductServicesRealEstate _productServicesRealEstate;
 		private readonly ICategoryServices _categoryServices;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _applicationDbContext;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService, IProductServicesRealEstate productServicesRealEstate,
+        public HomeController(ILogger<HomeController> logger,
                                 ICategoryServices categoryServices, 
                                 UserManager<IdentityUser> userManager, ApplicationDbContext applicationDbContext)
         {
             _logger = logger;
-            _productService = productService;
-			_productServicesRealEstate = productServicesRealEstate;
 			_categoryServices = categoryServices;
             _userManager = userManager;
             _applicationDbContext = applicationDbContext;

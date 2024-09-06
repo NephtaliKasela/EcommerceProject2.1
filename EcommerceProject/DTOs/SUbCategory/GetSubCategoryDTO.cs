@@ -1,6 +1,8 @@
-﻿namespace EcommerceProject.DTOs.SUbCategory
+﻿using EcommerceProject.Models.Products;
+
+namespace EcommerceProject.DTOs.Subcategory
 {
-    public class GetSubCategoryDTO
+    public class GetSubcategoryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -8,6 +10,6 @@
         // Other properties specific to the category
 
         public Models.Category Category { get; set; } 
-        public List<Models.Product> Products { get; set; }
+        public List<BodyProduct>? BodyProducts { get; set; }
     }
 }

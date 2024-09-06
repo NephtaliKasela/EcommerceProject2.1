@@ -1,15 +1,14 @@
-﻿using EcommerceProject.DTOs.SUbCategory;
+﻿using EcommerceProject.DTOs.Subcategory;
 using EcommerceProject.Models;
-using EcommerceProject.Services.ProductService;
 using EcommerceProject.Services.SubCategoryServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceProject.Controllers
 {
-    public class SubCategoryController : Controller
+    public class SubcategoryController : Controller
     {
         private readonly ISubCategoryServices _subCategoryServices;
-        public SubCategoryController(ISubCategoryServices subCategoryServices)
+        public SubcategoryController(ISubCategoryServices subCategoryServices)
         {
             _subCategoryServices = subCategoryServices;
         }
@@ -20,7 +19,7 @@ namespace EcommerceProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveAddSubCategory(AddSubCategoryDTO newSubCategory)
+        public IActionResult SaveAddSubCategory(AddSubcategoryDTO newSubCategory)
         {
             _subCategoryServices.AddSubCategory(newSubCategory);
 
@@ -40,7 +39,7 @@ namespace EcommerceProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveUpdateSubCategory(UpdateSubCategoryDTO updatedSubCategory)
+        public async Task<IActionResult> SaveUpdateSubCategory(UpdateSubcategoryDTO updatedSubCategory)
         {
             var subCategory = await _subCategoryServices.UpdateSubCategory(updatedSubCategory);
             return RedirectToAction("GetSubcategory", "Admin");

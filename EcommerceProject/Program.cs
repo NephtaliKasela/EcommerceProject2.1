@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
 using EcommerceProject.Data;
-using EcommerceProject.Services.ProductService;
 using EcommerceProject.Services.SubCategoryServices;
 using EcommerceProject.Services.ImageServices;
 using EcommerceProject.Services.CategoryServices;
@@ -14,8 +13,6 @@ using EcommerceProject.Services.CountryServices;
 using EcommerceProject.Services.OtherServices;
 using Microsoft.AspNetCore.Hosting;
 using EcommerceProject.Services.CityServices;
-using EcommerceProject.Services.SubCategoryServicesRealEstate;
-using EcommerceProject.Services.ProductService.ProductServicesRealEstate;
 
 internal class Program
 {
@@ -41,12 +38,9 @@ internal class Program
         builder.Services.AddScoped<ICountryServices, CountryServices>();
         builder.Services.AddScoped<ICityServices, CityServices>();
         builder.Services.AddScoped<ICategoryServices, CategoryServices>();
-        builder.Services.AddScoped<ISubCategoryServicesRealEstate, SubCategoryServicesRealEstate>();
-        builder.Services.AddScoped<IProductServicesRealEstate, ProductServicesRealEstate>();
 
         builder.Services.AddScoped<ISubCategoryServices, SubCategoryServices>();
-        builder.Services.AddScoped<IProductService, ProductService>();
-        builder.Services.AddScoped<IImageServices, ImageServices>();
+        //builder.Services.AddScoped<IProductService, ProductService>();
         builder.Services.AddScoped<IStoreServices, StoreServices>();
         builder.Services.AddScoped<IUserServices, UserServices>();
 
