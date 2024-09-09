@@ -36,7 +36,6 @@
   <ItemGroup>
     <Folder Include="Controllers\Products\" />
     <Folder Include="DTOs\ProductImage\" />
-    <Folder Include="DTOs\Product\" />
   </ItemGroup>
 
 </Project>

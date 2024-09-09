@@ -10,11 +10,11 @@ namespace EcommerceProject.Services.CountryServices
 {
 	public class CountryServices : ICountryServices
 	{
-		private readonly DataContext _context;
+		private readonly ApplicationDbContext _context;
 		private readonly IMapper _mapper;
         private readonly IOtherServices _otherServices;
 
-		public CountryServices(DataContext context, IMapper mapper, IOtherServices otherServices)
+		public CountryServices(ApplicationDbContext context, IMapper mapper, IOtherServices otherServices)
 		{
             _otherServices = otherServices;
             _mapper = mapper;

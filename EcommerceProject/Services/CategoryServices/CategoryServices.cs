@@ -9,10 +9,10 @@ namespace EcommerceProject.Services.CategoryServices
 {
     public class CategoryServices: ICategoryServices
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CategoryServices(DataContext context, IMapper mapper)
+        public CategoryServices(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

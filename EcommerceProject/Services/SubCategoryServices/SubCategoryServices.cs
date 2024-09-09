@@ -10,11 +10,11 @@ namespace EcommerceProject.Services.SubCategoryServices
 {
     public class SubCategoryServices: ISubCategoryServices
     {
-        private readonly DataContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 		private readonly ICategoryServices _categoryServices;
 
-		public SubCategoryServices(DataContext context, IMapper mapper, ICategoryServices categoryServices)
+		public SubCategoryServices(ApplicationDbContext context, IMapper mapper, ICategoryServices categoryServices)
         {
             _context = context;
             _mapper = mapper;

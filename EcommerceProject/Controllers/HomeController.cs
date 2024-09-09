@@ -2,7 +2,6 @@
 using EcommerceProject.DTOs.Actions;
 using EcommerceProject.Models;
 using EcommerceProject.Services.CategoryServices;
-using EcommerceProject.Services.UserServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,16 +15,14 @@ namespace EcommerceProject.Controllers
         private readonly ILogger<HomeController> _logger;
 		private readonly ICategoryServices _categoryServices;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ApplicationDbContext _applicationDbContext;
 
         public HomeController(ILogger<HomeController> logger,
                                 ICategoryServices categoryServices, 
-                                UserManager<IdentityUser> userManager, ApplicationDbContext applicationDbContext)
+                                UserManager<IdentityUser> userManager)
         {
             _logger = logger;
 			_categoryServices = categoryServices;
             _userManager = userManager;
-            _applicationDbContext = applicationDbContext;
         }
 
         public async Task<IActionResult> Index()

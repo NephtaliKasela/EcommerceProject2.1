@@ -6,7 +6,6 @@ namespace EcommerceProject.Models.Prices
     {
         public int Id { get; set; }
         public double MinimumPieces { get; set; }
-        public double MaximumPieces { get; set; }
         public double Price { get; set; }
 
         // Foreign keys

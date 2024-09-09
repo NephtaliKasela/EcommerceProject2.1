@@ -8,10 +8,10 @@ namespace EcommerceProject.Services.OtherServices
 {
     public class OtherServices : IOtherServices
     {
-		private readonly DataContext _context;
+		private readonly ApplicationDbContext _context;
 		private readonly IMapper _mapper;
 
-		public OtherServices(DataContext context, IMapper mapper)
+		public OtherServices(ApplicationDbContext context, IMapper mapper)
         {
 			_context = context;
 			_mapper = mapper;
